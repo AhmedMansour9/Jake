@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:id="@+id/rela"
+    android:clickable="true"
+    android:focusable="true">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bcdetails"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:id="@+id/rela_one"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:id="@+id/Image_product"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:scaleType="fitXY"
+                />
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bcdetails"
+        android:layout_below="@+id/rela_one"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:id="@+id/relatwo"
+        android:layout_height="@dimen/_60sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/T_Name"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:textColor="#758591"
+            />
+  <View
+       android:layout_width="@dimen/_2sdp"
+       android:layout_height="match_parent"
+       android:layout_marginRight="@dimen/_30sdp"
+       android:background="#FFF3F3F3"
+      android:id="@+id/view"
+      android:layout_toLeftOf="@+id/T_Price"
+    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/T_Price"
+            android:textColor="#758591"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_20sdp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relatwo"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:background="@drawable/bcdetailstwo"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/T_Descrption"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="#000"
+            android:maxLines="3"
+            />
+
+        <Button
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/backgroundaddcart"
+            android:layout_marginTop="@dimen/_140sdp"
+            android:text="@string/addcart"
+            android:id="@+id/add_cart"
+            android:textAllCaps="false"
+            />
+
+
+
+    </RelativeLayout>
+    <ProgressBar
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/Progross"
+
+        />
+</RelativeLayout>

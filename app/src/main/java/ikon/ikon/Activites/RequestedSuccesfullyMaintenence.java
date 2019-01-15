@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
 
 public class RequestedSuccesfullyMaintenence extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class RequestedSuccesfullyMaintenence extends AppCompatActivity {
         textdone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent inty=new Intent(RequestedSuccesfullyMaintenence.this,Navigation.class);
+                Intent inty=new Intent(RequestedSuccesfullyMaintenence.this,Shoping.class);
                 share.putString("count","0");
                 share.commit();
                 ShowProduct.liscart.clear();

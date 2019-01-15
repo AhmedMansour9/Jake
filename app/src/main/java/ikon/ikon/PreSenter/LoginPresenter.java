@@ -42,17 +42,16 @@ public class LoginPresenter {
             @Override
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
 
-                if (response.isSuccessful()) {
-                    if(response.body().getData().getRole()!=null){
-                        loginvieew.OpenRole(response.body().getData().getRole(),response.body().getData().getUserToken());
-
-                    }else {
-                        loginvieew.openMain(response.body().getData().getUserToken());
+                if (response.code()==200) {
+                     if(response.body().getData().getMessage().equals("login success")){
+                        loginvieew.OpenRole(response.body().getData().getCustomersName()
+                                ,response.body().getData().getEmail(),response.body().getData().getUserToken()
+                        ,response.body().getData().getCustomersPhone());
 
                     }
+                }else if(response.code()==400) {
+                        loginvieew.invalideemail("Invalide Email");
 
-                } else {
-                    loginvieew.showError("");
                 }
             }
 

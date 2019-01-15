@@ -8,15 +8,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class UserLogin {
+
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("user_token")
     @Expose
     private String userToken;
-    @SerializedName("role")
+    @SerializedName("customers_name")
     @Expose
-    private String role;
+    private String customersName;
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    @SerializedName("customers_phone")
+    @Expose
+    private String customersPhone;
+
 
     public String getMessage() {
         return message;
@@ -34,13 +43,26 @@ public class UserLogin {
         this.userToken = userToken;
     }
 
-    public String getRole() {
-        return role;
+    public String getCustomersName() {
+        return customersName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setCustomersName(String customersName) {
+        this.customersName = customersName;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getCustomersPhone() {
+        return customersPhone;
+    }
+
+    public void setCustomersPhone(String customersPhone) {
+        this.customersPhone = customersPhone;
+    }
 }

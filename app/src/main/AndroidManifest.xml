@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ikon.ikonN">
+    package="jak.jaaak">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -12,13 +12,13 @@
         android:name="ikon.ikon.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/iconlogo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
+        android:icon="@mipmap/iconapp"
+        android:roundIcon="@mipmap/iconapp"
+        android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:windowSoftInputMode="stateHidden">
+        android:windowSoftInputMode="adjustPan">
         <activity android:name="ikon.ikon.Activites.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,53 +26,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ikon.ikon.Activites.MainActivity" />
         <activity android:name="ikon.ikon.Activites.Register_Activity" />
         <activity android:name="ikon.ikon.Activites.Login" />
-        <activity android:name="ikon.ikon.Activites.Maintaince" />
-        <activity
-            android:name="ikon.ikon.Activites.Navigation"
-            android:label="@string/title_activity_navigation"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name="ikon.ikon.Activites.Maintincetwo" />
         <activity android:name="ikon.ikon.Activites.Shoping" />
         <activity android:name="ikon.ikon.Activites.Language" />
         <activity android:name="ikon.ikon.Activites.ShowProduct" />
-        <activity android:name="ikon.ikon.Activites.cartproducts" />
-        <activity android:name="ikon.ikon.Activites.listordermaintenence" />
+        <activity android:name="ikon.ikon.Activites.ResetPassword"
+            android:theme="@style/Base.Theme.AppCompat.Dialog"
+            />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"
             tools:replace="android:value" />
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCJ6CfOZbzzEilL-dS9y-cfi5PXTTgWrNI" />
+            android:value="AIzaSyBGS40Mul8U0L2foyV1LAmfR91IryKxK1I" />
 
-        <activity
-            android:name="ikon.ikon.Activites.Dialogee"
-            android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name="ikon.ikon.Activites.Accessoriescategoryid" />
-        <activity android:name="ikon.ikon.Activites.OrderLocation" />
-        <activity android:name="ikon.ikon.Activites.ListOrdersShopping" />
-        <activity android:name="ikon.ikon.Activites.ShowProductsId" />
         <activity android:name="ikon.ikon.Activites.RequestedSuccessfully" />
-        <activity android:name="ikon.ikon.Activites.RequestedSuccesfullyMaintenence"></activity>
+        <activity android:name="ikon.ikon.Activites.RequestedSuccesfullyMaintenence" />
+
     </application>
 
 </manifest>

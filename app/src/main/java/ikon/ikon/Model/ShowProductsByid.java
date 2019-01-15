@@ -10,12 +10,13 @@ import java.util.List;
  */
 
 public class ShowProductsByid {
+
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("Products_Order")
+    @SerializedName("Details")
     @Expose
-    private List<ShowOrdersyid> productsOrder = null;
+    private List<Detail_Products> details = null;
 
     public String getMessage() {
         return message;
@@ -25,11 +26,11 @@ public class ShowProductsByid {
         this.message = message;
     }
 
-    public List<ShowOrdersyid> getProductsOrder() {
-        return productsOrder;
+    public List<Detail_Products> getDetails() {
+        return details;
     }
 
-    public void setProductsOrder(List<ShowOrdersyid> productsOrder) {
-        this.productsOrder = productsOrder;
+    public void setDetails(List<Detail_Products> details) {
+        this.details = details;
     }
 }

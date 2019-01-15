@@ -5,10 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
 
 /**
@@ -25,7 +26,7 @@ public class Language extends AppCompatActivity {
         shared=getSharedPreferences("Language",MODE_PRIVATE);
        String Lan=shared.getString("Lann",null);
         if(Lan!=null){
-            startActivity(new Intent(Language.this,MainActivity.class));
+            startActivity(new Intent(Language.this,Login.class));
             finish();
         }
         setContentView(R.layout.language);
@@ -38,7 +39,7 @@ public class Language extends AppCompatActivity {
         btnAtabic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent y=new Intent(Language.this,MainActivity.class);
+                Intent y=new Intent(Language.this,Login.class);
                 share.putString("Lann","ar");
                 share.commit();
                 startActivity(y);
@@ -49,7 +50,7 @@ public class Language extends AppCompatActivity {
         btnEng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent y=new Intent(Language.this,MainActivity.class);
+                Intent y=new Intent(Language.this,Login.class);
                 share.putString("Lann","en");
                 share.commit();
                 startActivity(y);

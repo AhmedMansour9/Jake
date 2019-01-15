@@ -2,7 +2,6 @@ package ikon.ikon.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,15 +17,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Activites.Shoping;
-import ikon.ikon.Model.Cart;
-
+import ikon.ikon.Model.Cart_Details;
 import ikon.ikon.Viewes.CountView;
-import ikon.ikonN.R;
-
-
-import static android.content.Context.MODE_PRIVATE;
-import static com.facebook.FacebookSdk.getApplicationContext;
+import ikon.ikon.Viewes.Count_View;
+import jak.jaaak.R;
 
 /**
  * Created by ic on 9/10/2018.
@@ -36,30 +30,30 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
 
 
-    private List<Cart> filteredList=new ArrayList<>();
+    public static List<Cart_Details> filteredList=new ArrayList<>();
     SharedPreferences.Editor share;
     CountView count;
     public static String TotalPrice;
     View itemView;
     Context con;
-    String prrice;
+    Count_View count_view;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView T_Name,T_Discrption,T_Model,T_Price,count;
-        ImageView mobile;
+        public TextView T_Name,T_Discrption,T_Model,T_Price,counter,plus,minus;
+        ImageView Image_product;
         ProgressBar progressBar;
         ImageView btncart;
-        public ImageView plus,minus,delete;
+        public ImageView delete;
 
         public MyViewHolder(View view) {
             super(view);
             T_Name = view.findViewById(R.id.T_Name);
-            T_Discrption = view.findViewById(R.id.T_Discrption);
-            T_Model = view.findViewById(R.id.T_Model);
+            Image_product = view.findViewById(R.id.Image_product);
+            plus = view.findViewById(R.id.plus);
             T_Price = view.findViewById(R.id.T_Price);
-            mobile=view.findViewById(R.id.Image_Phone);
-            progressBar=view.findViewById(R.id.progrossimage);
-            count=view.findViewById(R.id.contuner);
-            delete=view.findViewById(R.id.Image_Delete);
+            minus=view.findViewById(R.id.minus);
+            progressBar=view.findViewById(R.id.progressBar);
+            counter=view.findViewById(R.id.counter);
+            delete=view.findViewById(R.id.delete);
 
 
         }
@@ -67,12 +61,14 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
     }
 
-    public Cart_Adapter(List<Cart> phon,Context context){
+    public Cart_Adapter(List<Cart_Details> phon, Context context){
         filteredList=phon;
         this.con=context;
     }
 
-
+    public void count(Count_View count_view){
+        this.count_view=count_view;
+    }
     @Override
     public Cart_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
@@ -82,23 +78,42 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
     @Override
     public void onBindViewHolder(final Cart_Adapter.MyViewHolder holder, final int position) {
-        share=con.getSharedPreferences("count",MODE_PRIVATE).edit();
 
+        holder.T_Name.setText(filteredList.get(position).getProductsName());
+        holder.T_Price.setText(filteredList.get(position).getFinalPrice());
+        holder.counter.setText(filteredList.get(position).getCustomersBasketQuantity());
 
-        holder.T_Name.setText(filteredList.get(position).getName());
-//        holder.count.setText(filteredList.get(position).getCount());
-        String a = filteredList.get(position).getDiscroption();
-        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count=Integer.parseInt(holder.counter.getText().toString());
+                count++;
+                holder.counter.setText(count+"");
+                count_view.count_plus(String.valueOf(filteredList.get(position).getCustomersBasketId()));
+            }
+        });
 
-        holder.T_Price.setText(filteredList.get(position).getPrice());
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int count=Integer.parseInt(holder.counter.getText().toString());
+                if(count>1) {
+                    count--;
+                    holder.counter.setText(count + "");
+                    count_view.count_minus(String.valueOf(filteredList.get(position).getCustomersBasketId()));
+                }
+            }
+        });
+
         String i = filteredList.get(position).getImage();
-
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
-                .load("https://ikongo.com/"+u)
-                .resize(500,500)
-                .into(holder.mobile, new Callback() {
+        Picasso.with(con)
+                .load("http://jak-go.com/"+u)
+                .fit()
+                .centerCrop()
+                .into(holder.Image_product, new Callback() {
                     @Override
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.GONE);
@@ -110,23 +125,23 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
                     }
                 });
 
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
-        holder.T_Name.setTypeface(typeface);
-        holder.T_Model.setTypeface(typeface);
-        holder.T_Discrption.setTypeface(typeface);
-        holder.T_Price.setTypeface(typeface);
+
+//        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
+//        holder.T_Name.setTypeface(typeface);
+//        holder.T_Model.setTypeface(typeface);
+//        holder.T_Discrption.setTypeface(typeface);
+//        holder.T_Price.setTypeface(typeface);
 
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(filteredList.get(position).getCustomersBasketId()!=null) {
+                    count_view.delete(String.valueOf(filteredList.get(position).getCustomersBasketId()),
+                            String.valueOf(position));
+                    filteredList.remove(position);
 
-            filteredList.remove(position);
-                Shoping.T_Cartshop.setText(String.valueOf(filteredList.size()));
-                notifyDataSetChanged();
-                share.putString("count",String.valueOf(filteredList.size()));
-                share.commit();
-
+                }
             }
         });
 

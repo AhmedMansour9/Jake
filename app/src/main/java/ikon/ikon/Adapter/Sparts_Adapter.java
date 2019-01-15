@@ -24,10 +24,9 @@ import java.util.List;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Spart;
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by ic on 9/8/2018.
@@ -120,7 +119,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
         String i = filteredList.get(position).getProductsImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
+        Picasso.with(con)
                 .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
@@ -135,7 +134,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
                     }
                 });
 
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
+        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
         holder.T_Name.setTypeface(typeface);
 //        holder.T_Model.setTypeface(typeface);
 //        holder.T_Discrption.setTypeface(typeface);

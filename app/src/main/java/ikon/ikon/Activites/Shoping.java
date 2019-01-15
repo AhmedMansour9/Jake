@@ -1,25 +1,27 @@
 package ikon.ikon.Activites;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,70 +30,68 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import ikon.ikon.Adapter.Banner_Adapter;
-import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Fragments.Accessories;
-import ikon.ikon.Fragments.Phones;
-import ikon.ikon.Fragments.Sparts;
-import ikon.ikon.Model.Banner;
+import ikon.ikon.*;
+import ikon.ikon.Fragments.Home;
+import ikon.ikon.Fragments.Offers;
+import ikon.ikon.Fragments.OrderLocation;
+import ikon.ikon.Fragments.Profile;
+import ikon.ikon.Fragments.Setting;
+import ikon.ikon.Fragments.cartproducts;
 import ikon.ikon.Model.Cart;
-import ikon.ikon.Model.Count;
-import ikon.ikon.PreSenter.BannerPresenter;
-import ikon.ikon.PreSenter.CounterPresenter;
-import ikon.ikon.Viewes.BannerView;
-import ikon.ikon.Viewes.CountView;
-import ikon.ikonN.R;
+import ikon.ikon.PreSenter.Get_Counter_Presenter;
+import ikon.ikon.Viewes.Counter_View;
+import ikon.ikon.Viewes.OnBackPressed;
+import jak.jaaak.R;
 
-public class Shoping extends AppCompatActivity implements BannerView {
+public class Shoping extends AppCompatActivity  implements Counter_View {
     public static TabLayout tabLayout;
     private ViewPager viewPager;
    public static TextView T_Cartshop;
     private List<Cart> liscart=new LinkedList<>();
     ImageView btncartshop;
-    Banner_Adapter banerAdapter;
-    RecyclerView recyclerVie;
-    BannerPresenter baner;
     SharedPreferences share;
-    LinearLayoutManager linearLayoutManager;
-    private RecyclerView rv_autoScroll;
-    final int duration = 10;
-    final int pixelsToMove = 30;
-    int position;
-    List<Banner> banne=new ArrayList<>();
-    Boolean end;
-
+    SharedPreferences sha;
+    SharedPreferences shaLan;
+    public static TextView T_Title;
+    Get_Counter_Presenter counter_presenter;
+    SharedPreferences Shared;
+    TextView textcounter;
+    String user;
+    View view3;
+    Offers offers;
+    public static Boolean Visablty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        shaLan=getSharedPreferences("Language",MODE_PRIVATE);
+        String Lan=shaLan.getString("Lann",null);
+        Shared=getSharedPreferences("login",MODE_PRIVATE);
+        user=Shared.getString("logggin",null);
+
+        if(Lan!=null) {
+            Locale locale = new Locale(Lan);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+
+        }
         setContentView(R.layout.activity_shoping);
         viewPager = findViewById(R.id.viewpager);
-        T_Cartshop=findViewById(R.id.T_Cartshop);
-        btncartshop=findViewById(R.id.btncartshop);
-        Recyclview();
-        baner=new BannerPresenter(this,this);
-        if(isRTL()){
-            baner.GetBanner("ar");
-        }else {
-            baner.GetBanner("en");
-        }
-
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new AutoScrollTask(), 2000, 5000);
-
-
-
-        ;
+        counter_presenter=new Get_Counter_Presenter(getApplicationContext(),this);
+        counter_presenter.GetCounter(user,"en");
         share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
+        view3 = getLayoutInflater().inflate(R.layout.iconmycart, null);
+        textcounter=view3.findViewById(R.id.cartt);
 
-        String count=share.getString("count",null);
-        if(count!=null){
-            T_Cartshop.setText(count);
-            T_Cartshop.setBackgroundResource(R.drawable.circlecart);
-        }
+//        String count=share.getString("count",null);
+//        if(count!=null){
+//            T_Cartshop.setText(count);
+//            T_Cartshop.setBackgroundResource(R.drawable.circlecart);
+//        }
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -101,75 +101,86 @@ public class Shoping extends AppCompatActivity implements BannerView {
               tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#fffc00"));
 
         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+        tabLayout.setRotationX(180);
+        tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#fffc00"));
+        tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+        setupTabIcons();
+
 
         if(isRTL()) {
-            tabLayout.getTabAt(2).select();
+            tabLayout.getTabAt(4).select();
         }else {
             tabLayout.getTabAt(0).select();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             tabLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
-
-        btncartshop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Shoping.this,cartproducts.class));
-               finish();
-            }
-        });
-
-
-
+      onSelectedTab();
 
     }
 
-    private class AutoScrollTask extends TimerTask {
-        @Override
-        public void run() {
-            if(position == banne.size() -1){
-                end = true;
-            } else if (position == 0) {
-                end = false;
-            }
-            if(!end){
-                position++;
-            } else {
-                position--;
-            }
-            rv_autoScroll.smoothScrollToPosition(position);
-        }
-    }
+   public void onSelectedTab(){
+       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+           @Override
+           public void onTabSelected(TabLayout.Tab tab) {
 
+               FragmentManager fm = getSupportFragmentManager(); // or 'getSupportFragmentManager();'
+               int count = fm.getBackStackEntryCount();
+               if(count!=0) {
+                   for (int i = 0; i < count; ++i) {
+                       fm.popBackStack();
+                   }
+               }
+//                switch(tab.getPosition()) {
+               viewPager.setCurrentItem(tab.getPosition());
+           }
+
+           @Override
+           public void onTabUnselected(TabLayout.Tab tab) {
+
+           }
+
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
+               FragmentManager fm = getSupportFragmentManager(); // or 'getSupportFragmentManager();'
+               int count = fm.getBackStackEntryCount();
+               if(count!=0) {
+                   for (int i = 0; i < count; ++i) {
+                       fm.popBackStack();
+                   }
+               }
+           }
+       });
+   }
     public static boolean isRTL(Locale locale) {
         final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
         return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
                 directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
     }
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(Shoping.this,Navigation.class));
-        finish();
-    }
-    public void Recyclview(){
-        rv_autoScroll = findViewById(R.id.recycler_banner2);
-        rv_autoScroll.setHasFixedSize(true);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        startActivity(new Intent(Shoping.this,Navigation.class));
+//        finish();
+//    }
+
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
 
 
         if (isRTL()) {
-            adapter.addFragment(new Sparts(),getResources().getString(R.string.charges));
-            adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
-            adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
+            adapter.addFragment(new Setting(), getResources().getString(R.string.more));
+            adapter.addFragment(new cartproducts(), getResources().getString(R.string.mycart));
+            adapter.addFragment(new Offers(),getResources().getString(R.string.offers));
+            adapter.addFragment(new Profile(),getResources().getString(R.string.profile));
+            adapter.addFragment(new Home(),getResources().getString(R.string.home));
 
         } else {
             // The view has LTR layout
-
-            adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
-            adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
-            adapter.addFragment(new Sparts(),getResources().getString(R.string.charges));
+            adapter.addFragment(new Home(),getResources().getString(R.string.home));
+            adapter.addFragment(new Profile(),getResources().getString(R.string.profile));
+            adapter.addFragment(new Offers(),getResources().getString(R.string.offers));
+            adapter.addFragment(new cartproducts(), getResources().getString(R.string.mycart));
+            adapter.addFragment(new Setting(), getResources().getString(R.string.more));
 
         }
 
@@ -182,30 +193,50 @@ public class Shoping extends AppCompatActivity implements BannerView {
         return isRTL(Locale.getDefault());
     }
 
-    @Override
-    public void getBanner(List<Banner> banners) {
-        banne=banners;
-        banerAdapter = new Banner_Adapter(banners,this);
-         linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rv_autoScroll.setLayoutManager(linearLayoutManager);
-        rv_autoScroll.setAdapter(banerAdapter);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new AutoScrollTask(), 1000, 2000);
+    private void setupTabIcons() {
+        View view1 = getLayoutInflater().inflate(R.layout.iconhome, null);
+        View view2 = getLayoutInflater().inflate(R.layout.iconprofile, null);
+        View view3 = getLayoutInflater().inflate(R.layout.iconoffers, null);
+        View view4 = getLayoutInflater().inflate(R.layout.iconmycart, null);
+        View view5 = getLayoutInflater().inflate(R.layout.iconsetting, null);
 
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        rv_autoScroll.setItemAnimator(new DefaultItemAnimator());
-//        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-//        recyclerView.setHasFixedSize(true);
-//        rv_autoScroll.setLayoutManager(linearLayoutManager);
-//
-//        recyclerView.setHasFixedSize(true);
-//        rv_autoScroll.setAdapter(banerAdapter);
-
+        if(isRTL()){
+            tabLayout.getTabAt(0).setCustomView(view5);
+            tabLayout.getTabAt(1).setCustomView(view4);
+            tabLayout.getTabAt(2).setCustomView(view3);
+            tabLayout.getTabAt(3).setCustomView(view2);
+            tabLayout.getTabAt(4).setCustomView(view1);
+        }else {
+            tabLayout.getTabAt(0).setCustomView(view1);
+            tabLayout.getTabAt(1).setCustomView(view2);
+            tabLayout.getTabAt(2).setCustomView(view3);
+            tabLayout.getTabAt(3).setCustomView(view4);
+            tabLayout.getTabAt(4).setCustomView(view5);
+        }
     }
 
     @Override
-    public void Errorbaner() {
+    public void Counter(String counter) {
+        if(Integer.parseInt(counter)!=0) {
+
+            if (ikon.ikon.Language.isRTL()) {
+                TabLayout.Tab tab = tabLayout.getTabAt(1); // fourth tab
+                View tabView = tab.getCustomView();
+                TextView textView = tabView.findViewById(R.id.cartt);
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(counter);
+            } else {
+                TabLayout.Tab tab = tabLayout.getTabAt(3); // fourth tab
+                View tabView = tab.getCustomView();
+                TextView textView = tabView.findViewById(R.id.cartt);
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(counter);
+            }
+        }
+    }
+
+    @Override
+    public void Error() {
 
     }
 
@@ -233,7 +264,10 @@ public class Shoping extends AppCompatActivity implements BannerView {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            // TODO Auto-generated method stub
+        }
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -242,8 +276,61 @@ public class Shoping extends AppCompatActivity implements BannerView {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        List<Fragment> listOfFragments =getSupportFragmentManager().getFragments();
+
+        if(listOfFragments.size()>=1){
+            for (Fragment fragment : listOfFragments) {
+                if(fragment instanceof OrderLocation){
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                }
+            }
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        }
+    }
+    @Override
+    public void onBackPressed() {
+
+        //get current tab index.
+        int index = tabLayout.getSelectedTabPosition();
+        if(isRTL()){
+            if(Visablty) {
+                if (index != 4) {
+                    tabLayout.getTabAt(4).select();
+                } else {
+                    super.onBackPressed();
+                }
+            }else {
+                super.onBackPressed();
+            }
+        } else {
+            if(Visablty) {
+                if (index != 0) {
+                    tabLayout.getTabAt(0).select();
+                } else {
+                    super.onBackPressed();
+                }
+            }else {
+                super.onBackPressed();
+            }
+        }
+
+                }
+
+
+
+
 }

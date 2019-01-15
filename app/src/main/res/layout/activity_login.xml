@@ -14,58 +14,81 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
     <ImageView
-        android:layout_width="@dimen/_60sdp"
+        android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_80sdp"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/logo"
-        android:layout_margin="@dimen/_15sdp"
-        />
-    <EditText
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/loginbtns"
-        android:hint="@string/Email"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:gravity="center"
-
-        android:id="@+id/Log_Email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_140sdp"
-        />
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/logo"
+
+        android:id="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/Log_Email"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignLeft="@+id/Log_Password"
+        android:layout_alignStart="@+id/Log_Password"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="27dp"
+        android:drawableLeft="@drawable/iconemaillogo"
+        android:drawablePadding="@dimen/_10sdp"
+        android:hint="@string/Email"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/_10sdp"
+        android:textColor="#c9c9c9"
+        android:textColorHint="#c9c9c9"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
     <EditText
         android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/loginbtns"
+        android:layout_height="@dimen/_30sdp"
         android:hint="@string/Password"
-        android:textColor="#ffffff"
+        android:textColor="#c9c9c9"
+        android:textColorHint="#c9c9c9"
+        android:textSize="@dimen/_13sdp"
         android:textStyle="bold"
-        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/_10sdp"
         android:id="@+id/Log_Password"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/Log_Email"
         android:layout_marginTop="@dimen/_15sdp"
         android:inputType="textPassword"
+        android:drawableLeft="@drawable/iconlogopassword"
+        android:drawablePadding="@dimen/_10sdp"
         />
     <Button
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/signup"
+        android:background="@drawable/backgroundbtns"
         android:text="@string/signin"
-        android:textColor="#4b4b4b"
-        android:textSize="@dimen/_18sdp"
+        android:textColor="#fff"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold"
         android:layout_below="@+id/Log_Password"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_centerHorizontal="true"
         android:id="@+id/signin"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resetpass"
+        android:textSize="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Resetpass"
+        android:layout_below="@+id/signin"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        />
+
     <RelativeLayout
-        android:layout_width="@dimen/_150sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signin"
         android:id="@+id/Relat"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:layout_marginTop="@dimen/_40sdp">
 
         <ImageView
             android:layout_width="@dimen/_40sdp"
@@ -73,33 +96,53 @@
             android:src="@drawable/facebook"
             android:id="@+id/loginfac"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/Or"
-            android:textSize="@dimen/_20sdp"
-            />
-        <ImageView
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:src="@drawable/google"
-            android:id="@+id/google"
-            android:layout_alignParentRight="true"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:text="@string/Or"-->
+            <!--android:textSize="@dimen/_18sdp"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/_40sdp"-->
+            <!--android:layout_height="@dimen/_40sdp"-->
+            <!--android:src="@drawable/google"-->
+            <!--android:id="@+id/google"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--/>-->
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_below="@+id/Relat"
         android:layout_centerHorizontal="true"
+        android:id="@+id/relaaa"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Forget_password"
+            android:textSize="@dimen/_17sdp"
             android:id="@+id/Register"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guest"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:id="@+id/guest"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_10sdp"
             />
 
     </RelativeLayout>

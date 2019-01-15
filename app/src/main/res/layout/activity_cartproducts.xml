@@ -1,19 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#d9d9d9"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:id="@+id/cartframe"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/noproducts"
+        android:textColor="#000"
+        android:textSize="@dimen/_20sdp"
+        android:visibility="gone"
+        android:id="@+id/noproduct"
+        />
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bar"
+            android:background="@color/transparent"
+            app:popupTheme="@style/PopupOverlay">
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarnavigation"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#365f93">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/T_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="@string/mycart"
+                        />
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.AppBarLayout>
 
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_contain"
             android:layout_width="match_parent"
             android:layout_centerInParent="true"
+            android:layout_below="@+id/bar"
+            android:layout_above="@+id/relatwo"
             android:layout_height="match_parent">
 
 
@@ -25,18 +75,63 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_40sdp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginLeft="@dimen/_10sdp"
-    android:layout_marginRight="@dimen/_10sdp"
-    android:text="@string/rquestorder"
-    android:textSize="@dimen/_18sdp"
-    android:id="@+id/orderr"
-    android:layout_marginBottom="@dimen/_20sdp"
-    android:background="@drawable/btnregister"
-    />
+    <RelativeLayout
+        android:layout_width="@dimen/_270sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bctotalcart"
+        android:layout_above="@+id/rel"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relatwo"
+        android:visibility="gone"
+        android:layout_height="@dimen/_30sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total"
+            android:layout_centerVertical="true"
+            android:textColor="#818f9b"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="#818f9b"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:id="@+id/T_Price"
+            />
+
+
     </RelativeLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="@dimen/_270sdp"
+        android:background="@drawable/bcordercart"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:id="@+id/rel"
+        android:visibility="gone"
+        android:layout_height="@dimen/_100sdp">
+
+
+        <Button
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/backgroundaddcart"
+            android:layout_marginTop="@dimen/_140sdp"
+            android:text="@string/ordr"
+            android:id="@+id/requestorder"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-
-    tools:context="ikon.ikon.Fragments.GuesFragment">
+>
 
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
         android:id="@+id/rela"
         android:layout_height="@dimen/_160sdp">
         <android.support.v4.view.ViewPager

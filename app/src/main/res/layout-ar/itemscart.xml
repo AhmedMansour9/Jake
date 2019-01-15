@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bcdetails"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:id="@+id/rela_one"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/progressBar"
+            />
+
+
+        <ImageView
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:id="@+id/Image_product"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            />
+        <RelativeLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_below="@+id/Image_product"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="@dimen/_30sdp">
+
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/right_corner"
+                android:layout_alignParentRight="true"
+                android:text="+"
+                android:gravity="center"
+                android:textSize="@dimen/_17sdp"
+                android:id="@+id/plus"
+                />
+            <TextView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bcbetweenplusandminus"
+                android:textColor="#365f93"
+                android:text="1"
+                android:gravity="center"
+                android:id="@+id/counter"
+                />
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/left_corner"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:text="-"
+                android:id="@+id/minus"
+                android:textSize="@dimen/_17sdp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bcdetails"
+        android:layout_below="@+id/rela_one"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:id="@+id/relatwo"
+        android:layout_height="@dimen/_60sdp">
+
+
+        <TextView
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/T_Name"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#7e8c98"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/T_Price"
+            android:layout_below="@+id/T_Name"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textStyle="bold"
+            android:textColor="#7e8c98"
+            />
+
+        <View
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/delete"
+            android:background="#FFF3F3F3"
+            android:layout_marginLeft="@dimen/_20sdp"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentLeft="true"
+            android:textAllCaps="false"
+            android:src="@drawable/dele"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:id="@+id/delete"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

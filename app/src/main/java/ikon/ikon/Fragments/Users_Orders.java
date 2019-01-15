@@ -1,6 +1,7 @@
 package ikon.ikon.Fragments;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,23 +18,22 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Activites.Shoping;
+import ikon.ikon.Activites.ShowProductsId;
 import ikon.ikon.Adapter.AdapterMyOrders;
-import ikon.ikon.Adapter.ListOrderShopping_Adapter;
-import ikon.ikon.Model.MyorderShoping;
-import ikon.ikon.Model.MyorderShopingResponse;
 import ikon.ikon.Model.Myordershop;
 import ikon.ikon.PreSenter.CounterPresenter;
-import ikon.ikon.PreSenter.ListOrderShopping_Presenter;
 import ikon.ikon.PreSenter.MyOrderShoppingPresenter;
 import ikon.ikon.Viewes.MyOrderShopingView;
-import ikon.ikonN.R;
+import ikon.ikon.Viewes.OrderDetails;
+import jak.jaaak.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefreshListener,MyOrderShopingView  {
+public class Users_Orders extends Fragment implements OrderDetails,SwipeRefreshLayout.OnRefreshListener,MyOrderShopingView {
 
 
     public Users_Orders() {
@@ -52,6 +52,7 @@ public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefre
     String logi;
     SharedPreferences share;
     TextView noOrderss;
+    String Name;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,33 +66,23 @@ public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefre
         Lan = shared.getString("Lann", null);
         Recyclview();
         SwipRefresh();
+        getData();
         if(logi==null){
             noOrderss.setVisibility(View.VISIBLE);
 
         }
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(true);
-                mSwipeRefreshLayout.setEnabled(true);
-                if (Lan != null) {
-                    listorderPresenter.GetListOrderShoping(Lan,logi);
-                } else {
-
-                    if (isRTL()) {
-                        listorderPresenter.GetListOrderShoping("ar",logi);
-                    } else {
-                        listorderPresenter.GetListOrderShoping("en",logi);
-                    }
-                }
-            }
-        });
 
 
         return view;
     }
 
+    public void getData(){
+        Bundle bundle=getArguments();
+        if(bundle!=null){
+            Name=bundle.getString("name");
+        }
+    }
     public void Recyclview() {
         recyclerView = view.findViewById(R.id.recycler_myorders);
         recyclerView.setHasFixedSize(true);
@@ -158,6 +149,7 @@ public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefre
 
         }
         adapter = new AdapterMyOrders(order,getActivity());
+        adapter.OnClick(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -165,7 +157,6 @@ public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefre
 //        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -177,5 +168,52 @@ public class Users_Orders extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void Error() {
         mSwipeRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public void id(String id) {
+        if(Name.equals("setting")){
+            ShowProductsId details_product=new ShowProductsId();
+            Bundle args = new Bundle();
+            args.putString("id",id);
+            details_product.setArguments(args);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.setting_Frame, details_product )
+                    .addToBackStack(null)
+                    .commit();
+
+        }else if(Name.equals("profile")){
+            ShowProductsId details_product=new ShowProductsId();
+            Bundle args = new Bundle();
+            args.putString("id",id);
+            details_product.setArguments(args);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.Profile_Frame, details_product )
+                    .addToBackStack(null)
+                    .commit();
+
+        }
+
+    }
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            Shoping.Visablty = false;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Shoping.Visablty = false;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Shoping.Visablty = true;
     }
 }

@@ -44,11 +44,15 @@ public class Register {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
 
-                if (response.isSuccessful()) {
-                    registerView.openMain();
-                } else {
-                    registerView.showError("");
-                }
+
+                    if (response.code() == 400) {
+
+                        registerView.validemail("");
+
+                    } else if (response.code() == 200) {
+                        registerView.openMain();
+                    }
+
             }
 
 

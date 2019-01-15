@@ -1,24 +1,162 @@
 package ikon.ikon.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by ic on 9/9/2018.
  */
 
 public class Cart {
-    private String count;
-    private String id;
-    private String Name;
-    private String Discroption;
-    private String Price;
+    @SerializedName("customers_basket_id")
+    @Expose
+    private String customersBasketId;
+    @SerializedName("customers_id")
+    @Expose
+    private String customersId;
+    @SerializedName("products_id")
+    @Expose
+    private String productsId;
+    @SerializedName("customers_basket_quantity")
+    @Expose
+    private String customersBasketQuantity;
+    @SerializedName("final_price")
+    @Expose
+    private String finalPrice;
+    @SerializedName("customers_basket_date_added")
+    @Expose
+    private String customersBasketDateAdded;
+    @SerializedName("is_order")
+    @Expose
+    private String isOrder;
+    @SerializedName("session_id")
+    @Expose
+    private String sessionId;
+    @SerializedName("model")
+    @Expose
+    private String model;
+    @SerializedName("products_type")
+    @Expose
+    private String productsType;
+    @SerializedName("min_order")
+    @Expose
+    private String minOrder;
+    @SerializedName("max_order")
+    @Expose
+    private String maxOrder;
+    @SerializedName("image")
+    @Expose
     private String image;
+    @SerializedName("products_name")
+    @Expose
+    private String productsName;
+    @SerializedName("price")
+    @Expose
+    private String price;
+    @SerializedName("weight")
+    @Expose
+    private String weight;
+    @SerializedName("unit")
+    @Expose
+    private String unit;
+    @SerializedName("products_slug")
+    @Expose
+    private String productsSlug;
 
-    public Cart(String count, String id, String name, String discroption, String price, String image) {
-        this.count = count;
-        this.id = id;
-        Name = name;
-        Discroption = discroption;
-        Price = price;
-        this.image = image;
+    public String getCustomersBasketId() {
+        return customersBasketId;
+    }
+
+    public void setCustomersBasketId(String customersBasketId) {
+        this.customersBasketId = customersBasketId;
+    }
+
+    public String getCustomersId() {
+        return customersId;
+    }
+
+    public void setCustomersId(String customersId) {
+        this.customersId = customersId;
+    }
+
+    public String getProductsId() {
+        return productsId;
+    }
+
+    public void setProductsId(String productsId) {
+        this.productsId = productsId;
+    }
+
+    public String getCustomersBasketQuantity() {
+        return customersBasketQuantity;
+    }
+
+    public void setCustomersBasketQuantity(String customersBasketQuantity) {
+        this.customersBasketQuantity = customersBasketQuantity;
+    }
+
+    public String getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(String finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public String getCustomersBasketDateAdded() {
+        return customersBasketDateAdded;
+    }
+
+    public void setCustomersBasketDateAdded(String customersBasketDateAdded) {
+        this.customersBasketDateAdded = customersBasketDateAdded;
+    }
+
+    public String getIsOrder() {
+        return isOrder;
+    }
+
+    public void setIsOrder(String isOrder) {
+        this.isOrder = isOrder;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getProductsType() {
+        return productsType;
+    }
+
+    public void setProductsType(String productsType) {
+        this.productsType = productsType;
+    }
+
+    public String getMinOrder() {
+        return minOrder;
+    }
+
+    public void setMinOrder(String minOrder) {
+        this.minOrder = minOrder;
+    }
+
+    public String getMaxOrder() {
+        return maxOrder;
+    }
+
+    public void setMaxOrder(String maxOrder) {
+        this.maxOrder = maxOrder;
     }
 
     public String getImage() {
@@ -29,43 +167,42 @@ public class Cart {
         this.image = image;
     }
 
-    public String getCount() {
-        return count;
+    public String getProductsName() {
+        return productsName;
     }
 
-    public void setCount(String count) {
-        this.count = count;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getDiscroption() {
-        return Discroption;
-    }
-
-    public void setDiscroption(String discroption) {
-        Discroption = discroption;
+    public void setProductsName(String productsName) {
+        this.productsName = productsName;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
-}
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getProductsSlug() {
+        return productsSlug;
+    }
+
+    public void setProductsSlug(String productsSlug) {
+        this.productsSlug = productsSlug;
+    }}

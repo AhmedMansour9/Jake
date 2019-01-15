@@ -45,8 +45,6 @@ public class MyOrderShoppingPresenter {
 
                 if (response.isSuccessful()) {
                     getListorder.OrderShopping(response.body().getData().getMaintenanceOrder());
-
-
                 } else {
                     getListorder.Error();
                 }

@@ -1,8 +1,6 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +9,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by ic on 9/18/2018.
@@ -30,10 +23,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class adorder_Succesfull_Adapter extends RecyclerView.Adapter<adorder_Succesfull_Adapter.MyViewHolder> {
 
-
-
     private List<Cart> filteredList=new ArrayList<>();
-
     CountView count;
     public static String TotalPrice;
     View itemView;
@@ -77,33 +67,33 @@ public class adorder_Succesfull_Adapter extends RecyclerView.Adapter<adorder_Suc
 
 
 
-        holder.T_Name.setText(filteredList.get(position).getName());
-//        holder.count.setText(filteredList.get(position).getCount());
-
-        holder.T_Price.setText(filteredList.get(position).getPrice());
-        String i = filteredList.get(position).getImage();
-
-        Uri u = Uri.parse(i);
-//        holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
-                .load("https://ikongo.com/"+u)
-                .resize(500,500)
-                .into(holder.mobile, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
-
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
-        holder.T_Name.setTypeface(typeface);
-        holder.T_Price.setTypeface(typeface);
-
+//        holder.T_Name.setText(filteredList.get(position).getName());
+////        holder.count.setText(filteredList.get(position).getCount());
+//
+//        holder.T_Price.setText(filteredList.get(position).getPrice());
+//        String i = filteredList.get(position).getImage();
+//
+//        Uri u = Uri.parse(i);
+////        holder.progressBar.setVisibility(View.VISIBLE);
+//        Picasso.with(getApplicationContext())
+//                .load("https://ikongo.com/"+u)
+//                .resize(500,500)
+//                .into(holder.mobile, new Callback() {
+//                    @Override
+//                    public void onSuccess() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//                });
+//
+//        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
+//        holder.T_Name.setTypeface(typeface);
+//        holder.T_Price.setTypeface(typeface);
+//
     }
 
     @Override

@@ -85,13 +85,13 @@ public class GPSTracker extends Service implements LocationListener {
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-        // Setting Dialogee Title
+        // Setting Request_Order Title
         alertDialog.setTitle("GPS is settings");
 
-        // Setting Dialogee Message
+        // Setting Request_Order Message
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
-        // Setting Icon to Dialogee
+        // Setting Icon to Request_Order
         //alertDialog.setIcon(R.drawable.delete);
 
         // On pressing Settings button

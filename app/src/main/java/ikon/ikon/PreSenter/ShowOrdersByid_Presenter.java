@@ -28,11 +28,12 @@ public class ShowOrdersByid_Presenter {
 
     }
 
-    public void GetListOrder(String lang,String id) {
+    public void GetListOrder(String lang,String id,String usertoken) {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("lang", lang);
+        queryMap.put("user_token", usertoken);
         queryMap.put("api_token", "100");
-        queryMap.put("order_id", id);
+        queryMap.put("orders_id", id);
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
 
@@ -42,7 +43,7 @@ public class ShowOrdersByid_Presenter {
             public void onResponse(Call<ShowProductsResponse> call, Response<ShowProductsResponse> response) {
 
                 if (response.isSuccessful()) {
-                    getListorder.GetListOrderShopping(response.body().getData().getProductsOrder());
+                    getListorder.GetListOrderShopping(response.body().getData().getDetails().get(0).getProducts());
 
                 } else {
                     getListorder.Errorlistorder();

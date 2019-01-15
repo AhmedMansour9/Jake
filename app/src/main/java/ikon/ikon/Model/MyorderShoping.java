@@ -13,7 +13,7 @@ public class MyorderShoping {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("ShopOrder")
+    @SerializedName("MyOrder")
     @Expose
     private List<Myordershop> maintenanceOrder = null;
 

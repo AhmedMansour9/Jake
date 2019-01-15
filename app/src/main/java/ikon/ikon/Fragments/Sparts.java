@@ -4,10 +4,7 @@ package ikon.ikon.Fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,25 +16,17 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import ikon.ikon.Activites.Navigation;
-import ikon.ikon.Activites.Shoping;
-import ikon.ikon.Adapter.Accessories_Adapter;
 import ikon.ikon.Adapter.Sparts_Adapter;
-import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
 import ikon.ikon.Model.Spart;
-import ikon.ikon.PreSenter.GetAccessoriesPresenter;
 import ikon.ikon.PreSenter.GetSpartspresenter;
 import ikon.ikon.Viewes.SpartsView;
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -124,7 +113,7 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
 //        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        recyclerView.setLayoutManager(linearLayoutManager);
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(gridLayoutManager);
 

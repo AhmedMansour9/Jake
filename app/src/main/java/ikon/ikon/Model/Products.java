@@ -3,35 +3,34 @@ package ikon.ikon.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by ic on 9/6/2018.
  */
 
 public class Products {
-    @SerializedName("products_id")
+
+    @SerializedName("message")
     @Expose
-    private Integer productsId;
-    @SerializedName("products_name")
+    private String message;
+    @SerializedName("products")
     @Expose
-    private String productsName;
+    private List<Product_Detail> products = null;
 
-    public Integer getProductsId() {
-        return productsId;
-    }
-
-    public void setProductsId(Integer productsId) {
-        this.productsId = productsId;
+    public String getMessage() {
+        return message;
     }
 
-    public String getProductsName() {
-        return productsName;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setProductsName(String productsName) {
-        this.productsName = productsName;
+    public List<Product_Detail> getProducts() {
+        return products;
     }
-    @Override
-    public String toString() {
-        return productsName;
-    }
-}
+
+    public void setProducts(List<Product_Detail> products) {
+        this.products = products;
+    }}
+

@@ -8,34 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import ikon.ikon.Activites.Navigation;
-import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
-import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Bussiness.items;
-import ikon.ikon.Fragments.GuesFragment;
-import ikon.ikon.Model.Cart;
-import ikon.ikon.Model.Items;
-import ikon.ikon.Model.Phone;
+import ikon.ikon.Model.DetailsProducts;
 import ikon.ikon.Model.Phones;
-import ikon.ikonN.R;
+import ikon.ikon.Model.Product_Detail;
+import ikon.ikon.Model.Product_Details;
+import jak.jaaak.R;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by ic on 9/7/2018.
@@ -44,43 +35,42 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHolder> implements Filterable {
 
 
-
-    public List<Phones> filteredList=new ArrayList<>();
+    DetailsProducts detailsProducts;
+    public List<Product_Detail> filteredList=new ArrayList<>();
     View itemView;
     Context con;
-    public static List<Phones> filtered = new ArrayList<>();
-    private List<Phones> mArrayList;
+    public static List<Product_Detail> filtered = new ArrayList<>();
+    private List<Product_Detail> mArrayList;
+    int current;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView T_Name,T_Discrption,T_Model,T_Price,count;
+        public TextView T_Name,T_Discrption,T_Model,T_Price,count,Add_ToCart;
         ImageView mobile;
         ProgressBar progressBar;
-        ImageView btncart;
+        TextView btncart;
         public ImageView plus,minus;
 
         public MyViewHolder(View view) {
             super(view);
             T_Name = view.findViewById(R.id.T_Name);
-            T_Discrption = view.findViewById(R.id.T_Discrption);
-            T_Model = view.findViewById(R.id.T_Model);
             T_Price = view.findViewById(R.id.T_Price);
             mobile=view.findViewById(R.id.Image_Phone);
-          progressBar=view.findViewById(R.id.progrossimage);
+            progressBar=view.findViewById(R.id.progrossimage);
             btncart=view.findViewById(R.id.btncard);
-//            count=view.findViewById(R.id.contuner);
-//            plus=view.findViewById(R.id.plus);
-//            minus=view.findViewById(R.id.minus);
+            Add_ToCart=view.findViewById(R.id.Add_ToCart);
 
         }
 
     }
 
-    public Phones_Adapter(List<Phones> phon,Context context){
+    public Phones_Adapter(List<Product_Detail> phon,Context context){
         filteredList=phon;
         this.con=context;
         mArrayList=phon;
     }
 
-
+    public void setOnClicklistner(DetailsProducts detailsProducts){
+        this.detailsProducts=detailsProducts;
+    }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
@@ -99,13 +89,13 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
 
 
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
         String i = filteredList.get(position).getProductsImage();
 
         Uri u = Uri.parse(i);
        holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
-                .load("https://ikongo.com/"+u)
+        Picasso.with(con)
+                .load("https://jak-go.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
                     @Override
@@ -118,62 +108,37 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
                         holder.progressBar.setVisibility(View.GONE);
                     }
                 });
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
+
+        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
         holder.T_Name.setTypeface(typeface);
 //        holder.T_Model.setTypeface(typeface);
 //        holder.T_Discrption.setTypeface(typeface);
         holder.T_Price.setTypeface(typeface);
-//        holder.btncart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                Cart car=new Cart(String.valueOf(a),String.valueOf(filteredList.get(position).getProductsId()),filteredList.get(position).getProductsName()
-//                        ,filteredList.get(position).getProductsDescription(),filteredList.get(position).getProductsPrice()
-//                ,filteredList.get(position).getProductsImage());
-//                liscart.add(car);
-//                Navigation.T_Cart.setText(String.valueOf(liscart.size()));
-//                ListItemCart lisst=new ListItemCart();
-//                lisst.Listitem(car);
-//
-//
-//            }
-//        });
-//        holder.plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                a++;
-//                holder.count.setText(String.valueOf(a));
-//
-//            }
-//        });
-//        holder.minus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                if(a>1) {
-//                    a--;
-//                    holder.count.setText(String.valueOf(a));
-//                }
-//            }
-//        });
+
+        holder.Add_ToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Product_Details details=new Product_Details();
+                details.setProductId(filteredList.get(position).getProductsId());
+                detailsProducts.CartDetails(details);
+
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Items i=new Items(String.valueOf(filteredList.get(position).getProductsId()),filteredList.get(position).getProductsName(),
-//                        filteredList.get(position).getProductsDescription(),filteredList.get(position).getProductsPrice());
-
-                Intent inty=new Intent(con, ShowProduct.class);
-                inty.putExtra("id",String.valueOf(filteredList.get(position).getProductsId()));
-                inty.putExtra("photo",filteredList.get(position).getProductsImage());
-                inty.putExtra("name",filteredList.get(position).getProductsName());
-                inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
-                inty.putExtra("price",filteredList.get(position).getProductsPrice());
-                con.startActivity(inty);
-
+                Product_Details details=new Product_Details();
+                details.setProductId(filteredList.get(position).getProductsId());
+                details.setProductName(filteredList.get(position).getProductsName());
+                details.setPrice(filteredList.get(position).getProductsPrice());
+                details.setModelProduct(filteredList.get(position).getProductsModel());
+                details.setProductImage(filteredList.get(position).getProductsImage());
+                details.setDescrption(filteredList.get(position).getProductsDescription());
+                detailsProducts.ProductsDetails(details);
+//
             }
-        });
+       });
 
 
     }
@@ -189,7 +154,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
                 if (charString.isEmpty()) {
                     filteredList = mArrayList;
                 } else {
-                    for (Phones androidVersion : mArrayList) {
+                    for (Product_Detail androidVersion : mArrayList) {
                         if (androidVersion.getProductsName().toLowerCase().contains(charString)) {
                             filtered.add(androidVersion);}}
                     filteredList = filtered;}
@@ -199,7 +164,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
             }
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredList = (List<Phones>) filterResults.values;
+                filteredList = (List<Product_Detail>) filterResults.values;
 
                 notifyDataSetChanged();
             }

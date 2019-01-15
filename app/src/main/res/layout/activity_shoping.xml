@@ -1,103 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:id="@+id/shop"
     tools:context="ikon.ikon.Activites.Shoping">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/relativeLayout">
 
 
-
-
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bar"
-        android:background="@color/transparent"
-        app:popupTheme="@style/PopupOverlay">
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        app:tabMode="fixed"
+        android:background="#fff"
+        app:tabGravity="fill"/>
 
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#0783e7"
-            android:id="@+id/toolbarnavigation">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-
-            <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:background="@drawable/carticonn"
-                android:id="@+id/btncartshop"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/T_Cartshop"
-                android:layout_marginRight="@dimen/_23sdp"
-                android:layout_alignParentRight="true"
-                android:textColor="#fff"
-                android:textSize="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:gravity="center"
-                android:textStyle="bold"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/_60sdp"
-                android:layout_centerVertical="true"
-                android:layout_height="@dimen/_30sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon"
-                android:layout_centerHorizontal="true"
-                />
-
-
-            </RelativeLayout>
-
-
-        </android.support.v7.widget.Toolbar>
-
-
-    </android.support.design.widget.AppBarLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_below="@+id/bar"
-            android:background="#0783e7"
-            app:tabMode="fixed"
-            app:tabGravity="fill"/>
-
-    </RelativeLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/relativeLayout"
-        android:id="@+id/recycler_banner2"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"/>
 
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
+        android:layout_above="@+id/tabs"
         android:layout_height="match_parent"
-        android:layout_below="@+id/recycler_banner2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

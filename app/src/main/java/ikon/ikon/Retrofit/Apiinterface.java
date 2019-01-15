@@ -5,7 +5,12 @@ import java.util.Map;
 import ikon.ikon.Model.AccessoriesResponse;
 import ikon.ikon.Model.AccessorySubCategoryResoonse;
 import ikon.ikon.Model.BannserResponsse;
+import ikon.ikon.Model.CartResponse;
+import ikon.ikon.Model.CartUpdate_Response;
+import ikon.ikon.Model.Cart_Response;
+import ikon.ikon.Model.Categories_Response;
 import ikon.ikon.Model.ColorResponse;
+import ikon.ikon.Model.Counter_Response;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.IssueTubeEnglishResponse;
@@ -14,14 +19,18 @@ import ikon.ikon.Model.ListOrderShoppingResponse;
 import ikon.ikon.Model.MyorderShopingResponse;
 import ikon.ikon.Model.OrderResponse;
 import ikon.ikon.Model.OrderShopping_Response;
+import ikon.ikon.Model.Order_Response;
 import ikon.ikon.Model.PeoductResponse;
+import ikon.ikon.Model.Products_Response;
+import ikon.ikon.Model.ProfileResponse;
+import ikon.ikon.Model.ResetPassword_Response;
+import ikon.ikon.Model.Sales_Response;
 import ikon.ikon.Model.ShowProductsResponse;
 import ikon.ikon.Model.SpartsResponse;
 import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
 import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.Model.RegisterFaceResponse;
-import ikon.ikon.PreSenter.OrderShoppinPresenter;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -38,6 +47,9 @@ public interface Apiinterface {
 
     @POST("login")
     Call<UserLoginResponse> Login(@QueryMap Map<String,String> queryMab);
+
+    @POST("password")
+    Call<ResetPassword_Response> ResetPass(@QueryMap Map<String,String> queryMab);
 
     @POST("signupMobileFacebook")
     Call<RegisterFaceResponse> RegisterFace_Book(@QueryMap Map<String,String> queryMab);
@@ -94,11 +106,59 @@ public interface Apiinterface {
     @POST("listShopOrder")
     Call<ListOrderShoppingResponse> GetListOrderShopping(@QueryMap Map<String,String> queryMab);
 
-    @POST("productByID")
+    @POST("ordersDetails")
     Call<ShowProductsResponse> GetListOrderShoppingById(@QueryMap Map<String,String> queryMab);
 
-    @POST("orderShopCustomer")
+    @POST("orderCustomer")
     Call<MyorderShopingResponse> GetListMyOrderShoping(@QueryMap Map<String,String> queryMab);
+
+
+    @POST("profile-customer")
+    Call<ProfileResponse> profileData (@QueryMap Map <String,String> queryMap);
+
+    @POST("showCategory")
+    Call<Categories_Response> categories(@QueryMap Map<String, String> queryMab);
+
+    @POST("showProduct")
+    Call<Products_Response> ProductsFeature(@QueryMap Map<String, String> queryMab);
+
+    @POST("showProductFeature")
+    Call<Products_Response> ProductssssFeature(@QueryMap Map<String, String> queryMab);
+
+
+    @POST("myCart")
+    Call<CartResponse> ShowCart(@QueryMap Map<String,String> queryMab);
+
+    @POST("showProductSpecial")
+    Call<Products_Response> Slash(@QueryMap Map<String, String> queryMab);
+
+
+    @POST("GetProductsFeature")
+    Call<Products_Response> GetProductsFeature(@QueryMap Map<String, String> queryMab);
+
+    @POST("showProductFlashSelle")
+    Call<Products_Response> ProductsFlash(@QueryMap Map<String, String> queryMab);
+
+    @POST("addToCart")
+    Call<Cart_Response> AddCart(@QueryMap Map<String,String> queryMab);
+
+    @POST("deleteFromCart")
+    Call<CartResponse> DeleteCart(@QueryMap Map<String,String> queryMab);
+
+    @POST("updateCartAddQty")
+    Call<CartUpdate_Response> UpdateCart(@QueryMap Map<String,String> queryMab);
+
+    @POST("updateCartdeleteQty")
+    Call<CartUpdate_Response> MinusCart(@QueryMap Map<String,String> queryMab);
+
+    @POST("countAndTotal")
+    Call<Counter_Response> Counter(@QueryMap Map<String,String> queryMab);
+
+    @POST("placeOrder")
+    Call<Order_Response> Order(@QueryMap Map<String,String> queryMab);
+
+    @POST("getSalesman")
+    Call<Sales_Response> getSalesMans(@QueryMap Map<String,String> queryMab);
 
 
 }

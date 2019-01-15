@@ -9,6 +9,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarnavigation"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#365f93">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/T_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#fff"
+                android:textSize="@dimen/_16sdp"
+                android:text="@string/phones"
+                />
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/search"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:id="@+id/Search"
+                />
+
+        </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -18,9 +49,11 @@
             android:background="@drawable/bssearch"
             android:paddingRight="15dp"
             android:id="@+id/findyourproduct"
+            android:layout_below="@+id/toolbarnavigation"
             android:paddingLeft="20dp"
             android:textColorHint="@android:color/black"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:alpha=".5"
             />
 
@@ -41,7 +74,13 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-
+        <ProgressBar
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerInParent="true"
+            android:id="@+id/Progrossphone"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 

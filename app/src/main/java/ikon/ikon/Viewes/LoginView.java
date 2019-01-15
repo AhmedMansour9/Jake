@@ -7,7 +7,8 @@ package ikon.ikon.Viewes;
 public interface LoginView {
 
     void openMain(String a);
-    void OpenRole(String role,String usertoken);
+    void OpenRole(String UserName,String Email,String usertoken,String phone);
     void showError(String error);
+    void invalideemail(String error);
 
 }

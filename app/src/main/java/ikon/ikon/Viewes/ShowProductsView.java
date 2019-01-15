@@ -2,6 +2,7 @@ package ikon.ikon.Viewes;
 
 import java.util.List;
 
+import ikon.ikon.Model.Product_Orders;
 import ikon.ikon.Model.ShopOrder;
 import ikon.ikon.Model.ShowOrdersyid;
 
@@ -10,7 +11,7 @@ import ikon.ikon.Model.ShowOrdersyid;
  */
 
 public interface ShowProductsView {
-    void GetListOrderShopping(List<ShowOrdersyid> list);
+    void GetListOrderShopping(List<Product_Orders> list);
     void Errorlistorder();
 
 }

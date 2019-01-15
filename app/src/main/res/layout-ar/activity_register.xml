@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bglogin"
+    android:layout_height="match_parent"
+    tools:context="ikon.ikon.Activites.Register_Activity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#ff0000"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+    <ImageView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/icon"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/icon"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/_20sdp"
+        android:paddingLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Relaone">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:hint="@string/FName"
+            android:textColor="#dfdfdf"
+            android:paddingLeft="@dimen/_20sdp"
+            android:paddingRight="@dimen/_20sdp"
+            android:id="@+id/E_FirstName"
+            android:textColorHint="#c9c9c9"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableRight="@drawable/usernamelogo"
+
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:hint="@string/LName"
+            android:textColor="#dfdfdf"
+            android:paddingLeft="@dimen/_20sdp"
+            android:id="@+id/E_LastName"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/E_FirstName"
+            android:textColorHint="#c9c9c9"
+            android:paddingRight="@dimen/_20sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableRight="@drawable/usernamelogo"
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:hint= "@string/Email"
+            android:textColor="#dfdfdf"
+            android:paddingLeft="@dimen/_20sdp"
+            android:id="@+id/E_Emai"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColorHint="#c9c9c9"
+            android:paddingRight="@dimen/_20sdp"
+            android:drawableRight="@drawable/iconemaillogo"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_below="@+id/E_LastName"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:hint="@string/Phone"
+            android:textColor="#dfdfdf"
+            android:textColorHint="#c9c9c9"
+            android:paddingLeft="@dimen/_20sdp"
+            android:id="@+id/E_Phone"
+            android:paddingRight="@dimen/_20sdp"
+            android:inputType="number"
+            android:layout_below="@+id/E_Emai"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableRight="@drawable/iconlogophone"
+            android:drawablePadding="@dimen/_10sdp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:textColor="#dfdfdf"
+            android:paddingRight="@dimen/_20sdp"
+            android:drawableRight="@drawable/iconlogopassword"
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="@string/Password"
+            android:gravity="end"
+            android:paddingLeft="@dimen/_20sdp"
+            android:id="@+id/E_Password"
+            android:layout_below="@+id/E_Phone"
+            android:textColorHint="#c9c9c9"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="textPassword"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:hint="@string/ConfirmPassword"
+            android:textColor="#dfdfdf"
+            android:paddingLeft="@dimen/_20sdp"
+            android:id="@+id/E_ConFirmPassword"
+            android:layout_below="@+id/E_Password"
+            android:inputType="textPassword"
+            android:textColorHint="#c9c9c9"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_20sdp"
+            android:drawableRight="@drawable/iconlogopassword"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="end"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Relaone"
+        android:paddingRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:paddingLeft="@dimen/_10sdp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/backgroundbtns"
+            android:text="@string/signup"
+            android:textColor="#fff"
+            android:id="@+id/Register"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:textSize="@dimen/_18sdp"
+            />
+
+    </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>

@@ -1,7 +1,6 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +18,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Activites.OrderLocation;
-import ikon.ikon.Model.ShopOrder;
+import ikon.ikon.Model.Product_Orders;
 import ikon.ikon.Model.ShowOrdersyid;
 import ikon.ikon.Viewes.CountView;
-import ikon.ikonN.R;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
+import jak.jaaak.R;
 
 /**
  * Created by ic on 9/17/2018.
@@ -35,7 +31,7 @@ public class Products_id_Adapter extends RecyclerView.Adapter<Products_id_Adapte
 
 
 
-    private List<ShowOrdersyid> filteredList=new ArrayList<>();
+    private List<Product_Orders> filteredList=new ArrayList<>();
 
     CountView count;
 
@@ -58,7 +54,7 @@ public class Products_id_Adapter extends RecyclerView.Adapter<Products_id_Adapte
 
     }
 
-    public Products_id_Adapter(List<ShowOrdersyid> phon, Context context){
+    public Products_id_Adapter(List<Product_Orders> phon, Context context){
         filteredList=phon;
         this.con=context;
     }
@@ -81,12 +77,12 @@ public class Products_id_Adapter extends RecyclerView.Adapter<Products_id_Adapte
         holder.T_Price.setText(filteredList.get(position).getFinalPrice()+"SR");
 //        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
-        String i = filteredList.get(position).getProductsImage();
+        String i = filteredList.get(position).getImage();
 
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
-                .load("https://ikongo.com/"+u)
+        Picasso.with(con)
+                .load("https://jak-go.com/"+u)
                 .resize(500,500)
                 .into(holder.imagespare, new Callback() {
                     @Override
@@ -100,7 +96,7 @@ public class Products_id_Adapter extends RecyclerView.Adapter<Products_id_Adapte
                     }
                 });
 
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
+        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
         holder.T_Name.setTypeface(typeface);
         holder.T_Price.setTypeface(typeface);
 

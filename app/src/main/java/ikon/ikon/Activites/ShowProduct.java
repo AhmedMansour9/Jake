@@ -1,6 +1,5 @@
 package ikon.ikon.Activites;
 
-import android.app.*;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,23 +13,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
 import ikon.ikon.PreSenter.CounterPresenter;
-import ikon.ikonN.R;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
+import jak.jaaak.R;
 
 /**
  * Created by ic on 9/10/2018.
@@ -124,25 +117,25 @@ public class ShowProduct extends AppCompatActivity implements Count{
                 .resize(500,500)
                 .into(Imgphone);
 
-        btncart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Cart car=new Cart(countt,id,Name,Discrp,Price,photo);
-                liscart.add(car);
-                contpresen.GetCount(String.valueOf(liscart.size()));
-                Snackbar.make(RelativeProduct,R.string.addcart,1500).show();
-                ListItemCart lisst=new ListItemCart();
-                share.putString("count",String.valueOf(String.valueOf(liscart.size())));
-                share.commit();
-
-                Shoping.T_Cartshop.setText(String.valueOf(liscart.size()));
-                lisst.Listitem(car);
-                startActivity(new Intent(ShowProduct.this,Shoping.class));
-                finish();
-
-            }
-        });
+//        btncart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Cart car=new Cart(countt,id,Name,Discrp,Price,photo);
+//                liscart.add(car);
+//                contpresen.GetCount(String.valueOf(liscart.size()));
+//                Snackbar.make(RelativeProduct,R.string.addcart,1500).show();
+//                ListItemCart lisst=new ListItemCart();
+//                share.putString("count",String.valueOf(String.valueOf(liscart.size())));
+//                share.commit();
+//
+//                Shoping.T_Cartshop.setText(String.valueOf(liscart.size()));
+//                lisst.Listitem(car);
+//                startActivity(new Intent(ShowProduct.this,Shoping.class));
+//                finish();
+//
+//            }
+//        });
 
 
     }

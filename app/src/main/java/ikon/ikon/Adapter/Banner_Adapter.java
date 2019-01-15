@@ -2,7 +2,6 @@ package ikon.ikon.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,14 +17,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Model.Banner;
-import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
-import ikon.ikonN.R;
-
-import static android.content.Context.MODE_PRIVATE;
-import static com.facebook.FacebookSdk.getApplicationContext;
+import jak.jaaak.R;
 
 /**
  * Created by ic on 9/23/2018.
@@ -78,8 +72,8 @@ public class Banner_Adapter extends RecyclerView.Adapter<Banner_Adapter.MyViewHo
         String i = filteredList.get(position).getImage();
         Uri u = Uri.parse(i);
 //        holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getApplicationContext())
-                .load("https://ikongo.com/public/images/mobile_banner/"+u)
+        Picasso.with(con)
+                .load("https://jak-go.com/public/images/mobile_banner/"+u)
                 .into(holder.imggg, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -91,6 +85,12 @@ public class Banner_Adapter extends RecyclerView.Adapter<Banner_Adapter.MyViewHo
 //                        holder.progressBar.setVisibility(View.GONE);
                     }
                 });
+
+//        Glide.with(con)
+//                .load("https://jak-go.com/public/images/mobile_banner/"+u)
+//                .diskCacheStrategy(DiskCacheStrategy.DATA)
+//                .into(imageView3);
+
 
 
     }

@@ -11,8 +11,7 @@ import android.widget.ImageView;
 
 import java.util.Locale;
 
-import ikon.ikon.Activites.MainActivity;
-import ikon.ikonN.R;
+import jak.jaaak.R;
 
 
 public class Splash extends AppCompatActivity {
@@ -34,10 +33,12 @@ public class Splash extends AppCompatActivity {
 
 
         final ImageView logo =  findViewById(R.id.First_logo);
-        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.animationsplash);
+//        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.animationsplash);
+        Animation animationSlideInLeft = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+        animationSlideInLeft.setDuration(2000);
 
-        logo.startAnimation(an);
-        an.setAnimationListener(new Animation.AnimationListener() {
+        logo.startAnimation(animationSlideInLeft);
+        animationSlideInLeft.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {}
 
