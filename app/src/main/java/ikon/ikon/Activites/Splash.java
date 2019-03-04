@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
         final ImageView logo =  findViewById(R.id.First_logo);
 //        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.animationsplash);
         Animation animationSlideInLeft = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
-        animationSlideInLeft.setDuration(2000);
+        animationSlideInLeft.setDuration(3000);
 
         logo.startAnimation(animationSlideInLeft);
         animationSlideInLeft.setAnimationListener(new Animation.AnimationListener() {

@@ -91,4 +91,8 @@
     <string name="usernotlogin">من فضلك قم بتسجيل دخول</string>
     <string name="alreadyexistemail">هذا الايميل موجود مسبقا</string>
     <string name="editprofile">تعديل البيانات </string>
+    <string name="updatedusersuccess">تم تحديث بياناتك بنجاح</string>
+    <string name="productunavialble">غير متوفر </string>
+    <string name="nomorestock">لا يوجد المزيد من الكمية في المخزن </string>
+    <string name="productsdetails">تفاصيل المنتج</string>
 </resources>

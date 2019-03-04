@@ -53,7 +53,7 @@
     <string name="profile">Profile</string>
     <string name="offers">Offers</string>
     <string name="mycart">My Cart</string>
-    <string name="more">More</string>
+    <string name="more">Setting</string>
     <string name="name">Name </string>
     <string name="email">Email</string>
     <string name="mobile">Phone</string>
@@ -92,4 +92,8 @@
     <string name="alreadyexistemail">This Email Already Exist</string>
 
     <string name="editprofile">Edit </string>
+    <string name="updatedusersuccess">User Info Updated Success</string>
+    <string name="productunavialble">Out of Stock </string>
+    <string name="nomorestock">There is No More Quantity In a Stoke</string>
+    <string name="productsdetails">Product Details</string>
 </resources>

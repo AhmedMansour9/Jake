@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -157,9 +158,11 @@ public class cartproducts extends Fragment implements ShowCart_View,SwipeRefresh
             if (list != null) {
                 cart_adapter = new Cart_Adapter(list, getContext());
                 cart_adapter.count(this);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(linearLayoutManager);
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+
+                recyclerView.setLayoutManager(gridLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(cart_adapter);
                 mSwipeRefreshLayout.setRefreshing(false);

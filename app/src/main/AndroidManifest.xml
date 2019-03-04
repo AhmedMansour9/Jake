@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/iconapp"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:windowSoftInputMode="adjustPan">
+        android:windowSoftInputMode="stateAlwaysHidden">
         <activity android:name="ikon.ikon.Activites.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,6 @@
         <activity android:name="ikon.ikon.Activites.Login" />
         <activity android:name="ikon.ikon.Activites.Shoping" />
         <activity android:name="ikon.ikon.Activites.Language" />
-        <activity android:name="ikon.ikon.Activites.ShowProduct" />
         <activity android:name="ikon.ikon.Activites.ResetPassword"
             android:theme="@style/Base.Theme.AppCompat.Dialog"
             />
@@ -44,7 +43,6 @@
             android:value="AIzaSyBGS40Mul8U0L2foyV1LAmfR91IryKxK1I" />
 
         <activity android:name="ikon.ikon.Activites.RequestedSuccessfully" />
-        <activity android:name="ikon.ikon.Activites.RequestedSuccesfullyMaintenence" />
 
     </application>
 

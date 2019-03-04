@@ -190,9 +190,9 @@ public class Phones extends Fragment implements Counter_View,Cart_View,Products_
                 mSwipeRefreshLayout.setEnabled(true);
                 mSwipeRefreshLayout.setRefreshing(true);
                     if (isRTL()) {
-                        products_presenter.GetFeatureProduct("ar",id);
+                        products_presenter.Product("ar",id);
                     } else {
-                        products_presenter.GetFeatureProduct("en",id);
+                        products_presenter.Product("en",id);
                     }
 
             }else {
@@ -216,9 +216,9 @@ public class Phones extends Fragment implements Counter_View,Cart_View,Products_
             mSwipeRefreshLayout.setEnabled(true);
 
                 if (isRTL()) {
-                    products_presenter.GetFeatureProduct("ar",id);
+                    products_presenter.Product("ar",id);
                 } else {
-                    products_presenter.GetFeatureProduct("en",id);
+                    products_presenter.Product("en",id);
                 }
 
         }else {
@@ -292,6 +292,7 @@ public class Phones extends Fragment implements Counter_View,Cart_View,Products_
         args.putString("model",list.getModelProduct());
         args.putString("categoryname",list.getCategoryName());
         args.putString("descrip",list.getDescrption());
+        args.putString("stock",list.getProductQuantity());
         details_product.setArguments(args);
         getFragmentManager().beginTransaction()
                 .add(R.id.rela, details_product )
@@ -303,12 +304,15 @@ public class Phones extends Fragment implements Counter_View,Cart_View,Products_
     @Override
     public void CartDetails(Product_Details list) {
         if(userToken!=null) {
-            ProgrossSpare.setVisibility(View.VISIBLE);
+            if(Integer.parseInt(list.getProductQuantity())>0) {
+                ProgrossSpare.setVisibility(View.VISIBLE);
+                if (Language.isRTL()) {
+                    addCart.Add_toCart("ar", userToken, list.getProductId());
+                } else {
+                    addCart.Add_toCart("en", userToken, list.getProductId());
+                }
+            }else {
 
-            if (Language.isRTL()) {
-                addCart.Add_toCart("ar", userToken, list.getProductId());
-            } else {
-                addCart.Add_toCart("en", userToken, list.getProductId());
             }
         }else {
             Toast.makeText(getActivity(), ""+getResources().getString(R.string.usernotlogin)

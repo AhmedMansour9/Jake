@@ -123,16 +123,18 @@ public class Home extends Fragment implements DetailsProducts,BannerView ,Produc
         if (networikConntection.isNetworkAvailable(getContext())) {
             if (ikon.ikon.Language.isRTL()) {
                 mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setEnabled(true);
                 categories.GetCategories("ar");
                 baner.GetBanner("ar");
-                products_presenter.GetFeatureProduct("ar","38");
+                products_presenter.GetFeatureProductsss("ar");
                 products_presenter.GetFeatureProductFlash("ar");
 
             } else {
                 mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setEnabled(true);
                 categories.GetCategories("en");
                 baner.GetBanner("en");
-                products_presenter.GetFeatureProduct("en","38");
+                products_presenter.GetFeatureProductsss("en");
                 products_presenter.GetFeatureProductFlash("en");
             }
         } else {
@@ -208,6 +210,7 @@ public class Home extends Fragment implements DetailsProducts,BannerView ,Produc
         args.putString("model",list.getModelProduct());
         args.putString("categoryname",list.getCategoryName());
         args.putString("descrip",list.getDescrption());
+        args.putString("stock",list.getProductQuantity());
         details_product.setArguments(args);
         getFragmentManager().beginTransaction()
                 .add(R.id.rela, details_product )
@@ -247,17 +250,21 @@ public class Home extends Fragment implements DetailsProducts,BannerView ,Produc
 
     @Override
     public void getBanner(List<Banner> banners) {
-        banne=banners;
-        banerAdapter = new Banner_Adapter(banners,getContext());
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rv_autoScroll.setLayoutManager(linearLayoutManager);
-        rv_autoScroll.setAdapter(banerAdapter);
 
-        if(banne.size()>1) {
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate( new AutoScrollTask(), 1000, 2000);
-        }
+                banne=banners;
+                banerAdapter = new Banner_Adapter(banners,getContext());
+                linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                rv_autoScroll.setLayoutManager(linearLayoutManager);
+                rv_autoScroll.setAdapter(banerAdapter);
+
+                if(banne.size()>1) {
+                    Timer timer = new Timer();
+                    timer.scheduleAtFixedRate( new AutoScrollTask(), 1000, 2000);
+                }
+
+
+
 
     }
     public static boolean isRTL() {
@@ -292,16 +299,18 @@ public class Home extends Fragment implements DetailsProducts,BannerView ,Produc
                 if (networikConntection.isNetworkAvailable(getContext())) {
                     if (ikon.ikon.Language.isRTL()) {
                         mSwipeRefreshLayout.setRefreshing(true);
+                        mSwipeRefreshLayout.setEnabled(true);
                         categories.GetCategories("ar");
                         baner.GetBanner("ar");
-                        products_presenter.GetFeatureProduct("ar","38");
-                        products_presenter.GetFeatureProductFlash("en");
+                        products_presenter.GetFeatureProductsss("ar");
+                        products_presenter.GetFeatureProductFlash("ar");
                     } else {
                         mSwipeRefreshLayout.setRefreshing(true);
+                        mSwipeRefreshLayout.setEnabled(true);
                         categories.GetCategories("en");
                         baner.GetBanner("en");
                         products_presenter.GetFeatureProductsss("en");
-                        products_presenter.GetFeatureProductFlash("ar");
+                        products_presenter.GetFeatureProductFlash("en");
                     }
                 } else {
 //                Snackbar.make(rela,getResources().getString(R.string.internet),1500).show();

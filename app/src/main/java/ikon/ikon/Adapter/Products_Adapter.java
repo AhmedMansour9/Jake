@@ -1,7 +1,9 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +43,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
     DetailsProducts detailsProducts;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView Text_Spare,Text_Price,Text_Details;
+        private TextView Text_Spare,Text_Price,Text_Details,quantity;
         private Button Callnow,Details;
         private ImageView img_Spare;
         private ProgressBar ProgrossSpare;
@@ -46,6 +53,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
             Text_Spare=view.findViewById(R.id.Text_Spare);
             Text_Price=view.findViewById(R.id.Text_Price);
             ProgrossSpare=view.findViewById(R.id.ProgrossSpare);
+            quantity=view.findViewById(R.id.quantity);
         }
 
     }
@@ -70,26 +78,35 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
 
     @Override
     public void onBindViewHolder(final Products_Adapter.MyViewHolder holder, final int position) {
+
+        if(filteredList.get(position).getDefaultStock()<1){
+            holder.quantity.setVisibility(View.VISIBLE);
+        }
         holder.Text_Spare.setText(filteredList.get(position).getProductsName());
-        holder.Text_Price.setText(String.valueOf(filteredList.get(position).getProductsPrice()));
+        holder.Text_Price.setText(String.valueOf(filteredList.get(position).getProductsPrice())+"SAR");
 
         String i = filteredList.get(position).getProductsImage();
         Uri u = Uri.parse(i);
         holder.ProgrossSpare.setVisibility(View.VISIBLE);
-        Picasso.with(con)
-                .load("https://jak-go.com/"+u)
-                .resize(500,500)
-                .into(holder.img_Spare, new Callback() {
+
+
+        Glide.with(con)
+                .load("http://jak-go.com/"+u)
+                .apply(new RequestOptions().override(500,500))
+
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public void onSuccess() {
-                        holder.ProgrossSpare.setVisibility(View.GONE);
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        // log exception
+                        return false; // important to return false so the error placeholder can be placed
                     }
 
                     @Override
-                    public void onError() {
-                        holder.ProgrossSpare.setVisibility(View.GONE);
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
                     }
-                });
+                })
+                .into(holder.img_Spare);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +118,8 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
                 details.setModelProduct(filteredList.get(position).getProductsModel());
                 details.setProductImage(filteredList.get(position).getProductsImage());
                 details.setDescrption(filteredList.get(position).getProductsDescription());
+                details.setProductQuantity(String.valueOf(filteredList.get(position).getDefaultStock()));
+
                 detailsProducts.ProductsDetails(details);
             }
         });

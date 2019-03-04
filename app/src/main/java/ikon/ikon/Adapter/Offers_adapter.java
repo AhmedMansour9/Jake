@@ -2,7 +2,9 @@ package ikon.ikon.Adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,31 +89,30 @@ public class Offers_adapter extends RecyclerView.Adapter<Offers_adapter.MyViewHo
 
 
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SAR");
         String i = filteredList.get(position).getProductsImage();
 
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(con)
-                .load("https://jak-go.com/"+u)
-                .resize(500,500)
-                .into(holder.mobile, new Callback() {
+
+
+        Glide.with(con)
+                .load("http://jak-go.com/"+u)
+                .apply(new RequestOptions().override(500,500))
+
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public void onSuccess() {
-                        holder.progressBar.setVisibility(View.GONE);
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        // log exception
+                        return false; // important to return false so the error placeholder can be placed
                     }
 
                     @Override
-                    public void onError() {
-                        holder.progressBar.setVisibility(View.GONE);
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
                     }
-                });
-
-//        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
-//        holder.T_Name.setTypeface(typeface);
-//        holder.T_Model.setTypeface(typeface);
-//        holder.T_Discrption.setTypeface(typeface);
-//        holder.T_Price.setTypeface(typeface);
+                })
+                .into(holder.mobile);
         holder.btncart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

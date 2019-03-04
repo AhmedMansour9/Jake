@@ -263,22 +263,22 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
 
 
 
-    public void GoogleSignOpition(){
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        googleApiClient = new GoogleApiClient.Builder(Login.this)
-                .enableAutoManage(Login.this, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-                    }
-                } /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
-
-    }
+//    public void GoogleSignOpition(){
+//        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        googleApiClient = new GoogleApiClient.Builder(Login.this)
+//                .enableAutoManage(Login.this, new GoogleApiClient.OnConnectionFailedListener() {
+//                    @Override
+//                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//                    }
+//                } /* OnConnectionFailedListener */)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+//                .build();
+//
+//    }
 
 
     public void FirebaseUserAuth(final GoogleSignInAccount googleSignInAccount) {

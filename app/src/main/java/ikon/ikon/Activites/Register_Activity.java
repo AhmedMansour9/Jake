@@ -44,13 +44,10 @@ public class Register_Activity extends AppCompatActivity implements RegisterView
             @Override
             public void onClick(View view) {
                 if (checkgbsAndNetwork.isNetworkAvailable(getBaseContext())) {
-
-
                     if (E_Emai.getText().toString().equals("")) {
                         E_Emai.setError("");
                         E_Emai.setFocusable(true);
                     }
-
                     if (E_FirstName.getText().toString().equals("")) {
                         E_FirstName.setError("");
                         E_FirstName.setFocusable(true);
@@ -60,7 +57,6 @@ public class Register_Activity extends AppCompatActivity implements RegisterView
                         E_LastName.setError("");
                         E_LastName.setFocusable(true);
                     }
-
                     if (E_Phone.getText().toString().equals("")) {
                         E_Phone.setError("");
                         E_Phone.setFocusable(true);

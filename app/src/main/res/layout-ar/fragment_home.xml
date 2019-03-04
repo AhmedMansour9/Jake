@@ -58,6 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/bar"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_height="@dimen/_150sdp"/>
 
 
@@ -88,11 +90,11 @@
                 android:id="@+id/rela_four"
                 android:visibility="gone"
                 android:layout_margin="@dimen/_10sdp"
-                android:layout_height="@dimen/_80sdp">
+                android:layout_height="@dimen/_60sdp">
 
                 <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/iconoffer"
                     android:id="@+id/offer"
@@ -105,7 +107,7 @@
                     android:textColor="#000"
                     android:id="@+id/special"
                     android:layout_toLeftOf="@+id/offer"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:text="@string/offersfor"
                     />
                 <TextView
@@ -113,11 +115,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:textColor="#000"
+                    android:textColor="#858585"
                     android:id="@+id/T_special"
                     android:layout_below="@+id/special"
                     android:layout_toLeftOf="@+id/offer"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:text="@string/selected"
                     />
 
@@ -154,11 +156,11 @@
                 android:background="@drawable/bccategory"
                 android:id="@+id/rela_three"
                 android:layout_margin="@dimen/_10sdp"
-                android:layout_height="@dimen/_80sdp">
+                android:layout_height="@dimen/_60sdp">
 
                 <ImageView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_80sdp"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:src="@drawable/feature"
                     android:id="@+id/featu"
                     />
@@ -170,7 +172,7 @@
                     android:textColor="#000"
                     android:id="@+id/feature"
                     android:layout_toLeftOf="@+id/featu"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:text="@string/featureproduct"
                     />
                 <TextView
@@ -178,11 +180,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:textColor="#000"
+                    android:textColor="#858585"
                     android:id="@+id/T_feature"
                     android:layout_below="@+id/feature"
                     android:layout_toLeftOf="@+id/featu"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:text="@string/recomended"
                     />
 

@@ -4,7 +4,9 @@ package ikon.ikon.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,8 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import ikon.ikon.Activites.Login;
 import ikon.ikon.Activites.Shoping;
@@ -47,7 +52,7 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
 
     View view;
     String Address,Id,ProductName,Price,Model,CategoryName,BrandName,PhoneVendor,image,VendorName,Desciption;
-    TextView T_Descrption,T_Address,T_ProductName,T_Price,T_Model,T_CategoryName,T_BrandName,T_PhoneVendor,loan,T_VendorName;
+    TextView T_Descrption,T_Address,T_ProductName,T_Price,T_Model,T_CategoryName,T_BrandName,T_PhoneVendor,loan,quantity;
     ImageView ImagProduct;
     SwipeRefreshLayout mSwipeRefreshLayout;
     NetworikConntection networikConntection;
@@ -59,13 +64,15 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
     String userToken;
     SharedPreferences.Editor Shared;
     Get_Counter_Presenter counter_presenter;
-
+    String ProductQuantity;
+    Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_details__product, container, false);
         addCart=new AddCart_Presenter(getContext(),this);
+        context=this.getActivity();
         prefs=this.getActivity().getSharedPreferences( "login", MODE_PRIVATE );
         userToken=prefs.getString( "logggin",null);
         Shared=getActivity().getSharedPreferences("login",MODE_PRIVATE).edit();
@@ -73,6 +80,7 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
         init();
         getData();
         Add_To_Cart();
+
         return view;
     }
     public void init(){
@@ -82,6 +90,7 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
         T_Descrption=view.findViewById(R.id.T_Descrption);
         Add_Cart=view.findViewById(R.id.add_cart);
         ProgrossSpare=view.findViewById(R.id.Progross);
+        quantity=view.findViewById(R.id.quantity);
     }
     @Override
     public void setMenuVisibility(final boolean visible) {
@@ -108,34 +117,47 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
             Model=a.getString("model");
             image=a.getString("image");
             Desciption=a.getString("descrip");
+            ProductQuantity=a.getString("stock");
             T_Descrption.setText(Desciption);
             T_ProductName.setText(ProductName);
-            T_Price.setText(Price+" LE");
-//            T_PhoneVendor.setText(PhoneVendor);
-            Picasso.with(getActivity())
-                    .load("https://jak-go.com/"+image)
-                    .into(ImagProduct, new Callback() {
+            T_Price.setText(Price+" SAR");
+            if(ProductQuantity!=null) {
+                if (Integer.parseInt(ProductQuantity) < 1) {
+                    quantity.setVisibility(View.VISIBLE);
+                    Add_Cart.setVisibility(View.GONE);
+                }
+            }
+            Glide.with(getActivity())
+                    .load("http://jak-go.com/"+image)
+                    .listener(new RequestListener<Drawable>() {
                         @Override
-                        public void onSuccess() {
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            // log exception
+                            return false; // important to return false so the error placeholder can be placed
                         }
 
                         @Override
-                        public void onError() {
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            return false;
                         }
-                    });
+                    })
+                    .into(ImagProduct);
+
         }
     }
 
     @Override
     public void Success() {
-        Toast.makeText(getContext(),getResources().getString(R.string.cartsuccesfull), Toast.LENGTH_SHORT).show();
+        if(context!=null) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.cartsuccesfull), Toast.LENGTH_SHORT).show();
+        }
         counter_presenter.GetCounter(userToken,"en");
         ProgrossSpare.setVisibility(View.GONE);
     }
 
     @Override
     public void Youhavethisproduct() {
-        if(view!=null) {
+        if(context!=null) {
             Toast.makeText(getActivity(),getResources().getString(R.string.productexist), Toast.LENGTH_SHORT).show();
         }
         ProgrossSpare.setVisibility(View.GONE);
@@ -222,5 +244,11 @@ public class Details_Product extends Fragment implements Counter_View,Cart_View 
     public void onStop() {
         super.onStop();
         Shoping.Visablty = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        context=null;
     }
 }

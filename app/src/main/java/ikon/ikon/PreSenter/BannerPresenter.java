@@ -39,12 +39,19 @@ public class BannerPresenter {
             @Override
             public void onResponse(Call<BannserResponsse> call, Response<BannserResponsse> response) {
 
+//                if (response.raw().cacheResponse() != null) {
+//                    getbanner.getBanner(response.body().getData().getBanner());                }
+//
+//                if (response.raw().networkResponse() != null) {
+//                    getbanner.getBanner(response.body().getData().getBanner());
+//                }
                 if (response.isSuccessful()) {
                     getbanner.getBanner(response.body().getData().getBanner());
 
                 } else {
                     getbanner.Errorbaner();
                 }
+
             }
 
 

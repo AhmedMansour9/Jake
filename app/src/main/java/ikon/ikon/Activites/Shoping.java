@@ -106,7 +106,6 @@ public class Shoping extends AppCompatActivity  implements Counter_View {
         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
         setupTabIcons();
 
-
         if(isRTL()) {
             tabLayout.getTabAt(4).select();
         }else {

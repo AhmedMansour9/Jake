@@ -395,7 +395,7 @@ public class OrderLocation extends Fragment implements Sales_View,OrderService_V
 
     @Override
     public void Orders(String orderid) {
-        Intent inty=new Intent(getContext(), RequestedSuccessfully.class);
+        Intent inty=new Intent(getActivity(), RequestedSuccessfully.class);
         inty.putExtra("id",orderid);
         inty.putExtra("price",price);
         startActivity(inty);

@@ -2,7 +2,9 @@ package ikon.ikon.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,10 +93,16 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int countity=Integer.parseInt(filteredList.get(position).getProductsQuantity());
                 int count=Integer.parseInt(holder.counter.getText().toString());
-                count++;
-                holder.counter.setText(count+"");
-                count_view.count_plus(String.valueOf(filteredList.get(position).getCustomersBasketId()));
+                if(count<countity) {
+                    count++;
+                    holder.counter.setText(count + "");
+                    count_view.count_plus(String.valueOf(filteredList.get(position).getCustomersBasketId()));
+                }else {
+                    Toast.makeText(con,con.getResources().getString(R.string.nomorestock), Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -109,22 +122,26 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
         String i = filteredList.get(position).getImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(con)
+
+        Glide.with(con)
                 .load("http://jak-go.com/"+u)
-                .fit()
-                .centerCrop()
-                .into(holder.Image_product, new Callback() {
+                .apply(new RequestOptions().override(500,500))
+
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public void onSuccess() {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         holder.progressBar.setVisibility(View.GONE);
+                        return false; // important to return false so the error placeholder can be placed
                     }
 
                     @Override
-                    public void onError() {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         holder.progressBar.setVisibility(View.GONE);
-                    }
-                });
 
+                        return false;
+                    }
+                })
+                .into(holder.Image_product);
 
 //        Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
 //        holder.T_Name.setTypeface(typeface);
@@ -140,7 +157,6 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
                     count_view.delete(String.valueOf(filteredList.get(position).getCustomersBasketId()),
                             String.valueOf(position));
                     filteredList.remove(position);
-
                 }
             }
         });

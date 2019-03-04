@@ -11,6 +11,7 @@ import ikon.ikon.Model.Cart_Response;
 import ikon.ikon.Model.Categories_Response;
 import ikon.ikon.Model.ColorResponse;
 import ikon.ikon.Model.Counter_Response;
+import ikon.ikon.Model.EditProfile_Response;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.IssueTubeEnglishResponse;
@@ -159,6 +160,9 @@ public interface Apiinterface {
 
     @POST("getSalesman")
     Call<Sales_Response> getSalesMans(@QueryMap Map<String,String> queryMab);
+
+    @POST("updateMyProfile")
+    Call<EditProfile_Response> EditProfile(@QueryMap Map<String,String> queryMab);
 
 
 }

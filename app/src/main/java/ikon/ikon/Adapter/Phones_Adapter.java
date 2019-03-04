@@ -1,9 +1,10 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Model.DetailsProducts;
-import ikon.ikon.Model.Phones;
 import ikon.ikon.Model.Product_Detail;
 import ikon.ikon.Model.Product_Details;
 import jak.jaaak.R;
@@ -43,7 +46,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
     private List<Product_Detail> mArrayList;
     int current;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView T_Name,T_Discrption,T_Model,T_Price,count,Add_ToCart;
+        public TextView T_Name,T_Discrption,T_Model,T_Price,count,Add_ToCart,quantity;
         ImageView mobile;
         ProgressBar progressBar;
         TextView btncart;
@@ -57,6 +60,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
             progressBar=view.findViewById(R.id.progrossimage);
             btncart=view.findViewById(R.id.btncard);
             Add_ToCart=view.findViewById(R.id.Add_ToCart);
+            quantity=view.findViewById(R.id.quantity);
 
         }
 
@@ -81,33 +85,36 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
+     if(filteredList.get(position).getDefaultStock()<1){
+         holder.quantity.setVisibility(View.VISIBLE);
+         holder.Add_ToCart.setVisibility(View.GONE);
+     }
 
         holder.T_Name.setText(filteredList.get(position).getProductsName());
-//        holder.T_Model.setText(filteredList.get(position).getProductsModel());
-//        String a = filteredList.get(position).getProductsDescription();
-//        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
-
-
-
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SAR");
         String i = filteredList.get(position).getProductsImage();
 
         Uri u = Uri.parse(i);
        holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(con)
-                .load("https://jak-go.com/"+u)
-                .resize(500,500)
-                .into(holder.mobile, new Callback() {
+
+        Glide.with(con)
+                .load("http://jak-go.com/"+u)
+                .apply(new RequestOptions().override(500,500))
+
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public void onSuccess() {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         holder.progressBar.setVisibility(View.GONE);
+                        return false; // important to return false so the error placeholder can be placed
                     }
 
                     @Override
-                    public void onError() {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         holder.progressBar.setVisibility(View.GONE);
+                        return false;
                     }
-                });
+                })
+                .into(holder.mobile);
 
         Typeface typeface = Typeface.createFromAsset(con.getAssets(), "fonts/no.otf");
         holder.T_Name.setTypeface(typeface);
@@ -120,6 +127,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
             public void onClick(View view) {
                 Product_Details details=new Product_Details();
                 details.setProductId(filteredList.get(position).getProductsId());
+                details.setProductQuantity(String.valueOf(filteredList.get(position).getDefaultStock()));
                 detailsProducts.CartDetails(details);
 
             }
@@ -135,6 +143,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
                 details.setModelProduct(filteredList.get(position).getProductsModel());
                 details.setProductImage(filteredList.get(position).getProductsImage());
                 details.setDescrption(filteredList.get(position).getProductsDescription());
+                details.setProductQuantity(String.valueOf(filteredList.get(position).getDefaultStock()));
                 detailsProducts.ProductsDetails(details);
 //
             }

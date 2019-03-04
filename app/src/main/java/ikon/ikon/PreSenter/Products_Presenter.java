@@ -25,13 +25,12 @@ public class Products_Presenter {
 
     }
 
-    public void GetFeatureProduct(String lang,String id) {
+    public void Product(String lang,String id) {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("lang", lang);
         queryMap.put("api_token", "100");
-
+        queryMap.put("cat_id", id);
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
-
         Call<Products_Response> call = apiInterface.ProductsFeature(queryMap);
         call.enqueue(new Callback<Products_Response>() {
             @Override

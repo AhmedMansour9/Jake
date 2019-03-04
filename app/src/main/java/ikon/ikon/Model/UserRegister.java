@@ -6,7 +6,15 @@ package ikon.ikon.Model;
 
 public class UserRegister  {
 
-    private String FirstName,LastName,Phone,Email,password,ConFirmpassword,Gender,id;
+    private String FirstName,LastName,Phone,Email,password,ConFirmpassword,Gender,id,Usertoken;
+
+    public String getUsertoken() {
+        return Usertoken;
+    }
+
+    public void setUsertoken(String usertoken) {
+        Usertoken = usertoken;
+    }
 
     public String getId() {
         return id;

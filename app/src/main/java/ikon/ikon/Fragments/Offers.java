@@ -89,7 +89,6 @@ public class Offers extends Fragment implements Counter_View,Cart_View,DetailsPr
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_offers, container, false);
         counter_presenter=new Get_Counter_Presenter(getApplicationContext(),this);
-
         product = view.findViewById(R.id.findyourproduct);
         getActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);

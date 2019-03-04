@@ -8,7 +8,15 @@ public class Product_Details {
 
 
     private String productId,productName,productImage,price,modelProduct,
-            CategoryName,brandName,addressVendor,phoneVendor,VendorName,Descrption;
+            CategoryName,brandName,addressVendor,phoneVendor,VendorName,Descrption,ProductQuantity;
+
+    public String getProductQuantity() {
+        return ProductQuantity;
+    }
+
+    public void setProductQuantity(String productQuantity) {
+        ProductQuantity = productQuantity;
+    }
 
     public String getDescrption() {
         return Descrption;

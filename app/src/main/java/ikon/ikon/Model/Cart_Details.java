@@ -65,6 +65,17 @@ public class Cart_Details {
     @Expose
     private String productsSlug;
 
+    @SerializedName("products_quantity")
+    @Expose
+    private String productsQuantity;
+
+    public String getProductsQuantity() {
+        return productsQuantity;
+    }
+
+    public void setProductsQuantity(String productsQuantity) {
+        this.productsQuantity = productsQuantity;
+    }
     public String getCustomersBasketId() {
         return customersBasketId;
     }

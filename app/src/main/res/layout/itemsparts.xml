@@ -15,15 +15,31 @@
         android:id="@+id/ProgrossSpare"
         android:visibility="gone"
         />
-
+<RelativeLayout
+    android:layout_width="@dimen/_80sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/rlaa"
+    android:layout_height="@dimen/_100sdp">
     <ImageView
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_centerHorizontal="true"
         android:id="@+id/img_Spare"
         android:scaleType="fitXY"
         />
+    <TextView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="#FF0000"
+        android:text="@string/productunavialble"
+        android:gravity="center"
+        android:alpha=".8"
+        android:visibility="gone"
+        android:id="@+id/quantity"
+        />
+</RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,8 +49,9 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/_14sdp"
         android:maxLines="1"
-        android:textColor="#6f7f8c"
-        android:layout_below="@+id/img_Spare"
+        android:gravity="center"
+        android:textColor="#596C7B"
+        android:layout_below="@+id/rlaa"
         android:layout_marginTop="@dimen/_10sdp"
         />
     <TextView
@@ -45,7 +62,8 @@
         android:id="@+id/Text_Price"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
-        android:textColor="#6f7f8c"
+        android:gravity="center"
+        android:textColor="#596C7B"
         android:textSize="@dimen/_12sdp"
         android:layout_below="@+id/Text_Spare"
         android:layout_marginTop="@dimen/_10sdp"

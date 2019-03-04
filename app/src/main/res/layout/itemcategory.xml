@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_80sdp"
+    android:layout_width="@dimen/_70sdp"
     android:layout_height="wrap_content">
 
     <ProgressBar
@@ -14,9 +14,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_Category"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_35sdp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -27,8 +28,9 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/image_Category"
-        android:textColor="#000"
+        android:textColor="#858585"
         android:layout_marginRight="@dimen/_5sdp"
+        android:textSize="@dimen/_9sdp"
         />
 
 
